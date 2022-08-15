@@ -20,5 +20,6 @@ import polls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('polls/', include('polls.urls', namespace = 'polls')),
+    path('', include('instagram.urls')),
+    path('polls/', include('polls.urls')),
 ]

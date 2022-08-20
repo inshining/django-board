@@ -1,7 +1,20 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
 from .models import Post 
 
-class PostSerializer(ModelSerializer):
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['usernam', 'email']
+
+class PostSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer()
     class Meta:
         model = Post 
-        fields = "__all__"
+        fields = [
+            'pk',
+            'author',
+            'message',
+            'created_at',
+            'updated_at'
+        ] 
